@@ -11,7 +11,6 @@ pipeline {
         stage('CMake') {
             steps {
                 cmakeBuild
-                    generator: 'Unix Makefiles',
                     buildDir: 'build',
                     sourceDir: 'source',
                     installation: 'InSearchPath',
