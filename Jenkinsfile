@@ -4,10 +4,20 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'echo "Building ..."'
-                sh 'chmod +x build.sh'
                 sh 'ls -la'
-                sh './build.sh'
-                archiveArtifacts artifacts: 'bin/*', fingerprint: true
+                sh 'pwd'
+            }
+        }
+        stage('CMake') {
+            steps {
+                cmakeBuild
+                    generator: 'Unix Makefiles',
+                    buildDir: 'build',
+                    sourceDir: 'source',
+                    installation: 'InSearchPath',
+                    steps: [
+                        [args: 'all install', envVars: 'DESTDIR=${WORKSPACE}/artifacts']
+      ]
             }
         }
     }
