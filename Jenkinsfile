@@ -3,20 +3,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'echo "Building ..."'
-                sh 'ls -la'
-                sh 'pwd'
-            }
-        }
-        stage('CMake') {
-            steps {
-                cmakeBuild
-                    buildDir: 'build',
-                    sourceDir: 'source',
-                    installation: 'InSearchPath',
-                    steps: [
-                        [args: 'all install', envVars: 'DESTDIR=${WORKSPACE}/artifacts']
-      ]
+                sh 'echo "Building with CMake ..."'
+                cmakeBuild buildType: 'Debug', cleanBuild: true, installation: 'InSearchPath', steps: [[withCmake: true]]
             }
         }
     }
