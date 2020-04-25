@@ -15,9 +15,10 @@ pipeline {
         }
         stage('Setup build environment') {
             steps {
-                sh 'apk add make'
-                sh 'apk add cmake'
-                sh 'apk add gcc'
+                sh 'apk add --upgrade make'
+                sh 'apk add --upgrade cmake'
+                sh 'apk add --upgrade gcc'
+                sh 'apk add --upgrade bash'
             }
         }
         stage('Check installed software') {
@@ -25,6 +26,7 @@ pipeline {
                 sh 'make --version'
                 sh 'cmake --version'
                 sh 'gcc --version'
+                sh 'bash --version'
                 sh 'ls -la /usr/bin'
                 sh 'ls -la /bin'
             }
