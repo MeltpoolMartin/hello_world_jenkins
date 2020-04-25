@@ -30,16 +30,16 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'chmod +x build.sh'
+                sh 'chmod +x scripts/build.sh'
                 sh 'pwd'
                 sh 'ls -la .'
-                sh './build.sh'
+                sh 'scripts/build.sh'
             }
         }
         stage('Run') {
             steps {
-                sh 'chmod +x run.sh'
-                sh './run.sh'
+                sh 'chmod +x scripts/run.sh'
+                sh 'scripts/run.sh'
             }
         }
     }
