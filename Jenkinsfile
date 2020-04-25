@@ -26,6 +26,7 @@ pipeline {
                 sh 'cmake --version'
                 sh 'gcc --version'
                 sh 'ls -la /usr/bin'
+                sh 'ls -la /bin'
             }
         }
         stage('Build') {
