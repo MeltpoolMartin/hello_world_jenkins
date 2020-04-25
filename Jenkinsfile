@@ -1,10 +1,31 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'alpine'
+            args '-u root'
+        }
+    }
     stages {
-        stage('Build') {
+        stage('Init package manager') {
             steps {
-                sh 'echo "Building with CMake ..."'
-                cmakeBuild buildType: 'Debug', cleanBuild: true, installation: 'InSearchPath', steps: [[withCmake: true]]
+                sh 'apk --version'
+                sh 'whoami'
+                sh 'apk update'
+            }
+        }
+        stage('Collect packages') {
+            steps {
+                sh 'apk add make'
+                sh 'apk add cmake'
+                sh 'apk add gcc'
+            }
+        }
+        stage('Check installed software') {
+            steps {
+                sh 'make --version'
+                sh 'cmake --version'
+                sh 'gcc --version'
+                sh 'ls -la /usr/bin'
             }
         }
     }
