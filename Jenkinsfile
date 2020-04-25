@@ -6,6 +6,11 @@ pipeline {
         }
     }
     stages {
+        stage('Clena up') {
+            steps {
+                sh 'rm -'
+            }
+        }
         stage('Init package manager') {
             steps {
                 sh 'apk --version'
@@ -18,6 +23,7 @@ pipeline {
                 sh 'apk add --upgrade make'
                 sh 'apk add --upgrade cmake'
                 sh 'apk add --upgrade gcc'
+                sh 'apk add --upgrade g++'
                 sh 'apk add --upgrade bash'
             }
         }
@@ -26,6 +32,7 @@ pipeline {
                 sh 'make --version'
                 sh 'cmake --version'
                 sh 'gcc --version'
+                sh 'g++ --version'
                 sh 'bash --version'
                 sh 'ls -la /usr/bin'
                 sh 'ls -la /bin'
