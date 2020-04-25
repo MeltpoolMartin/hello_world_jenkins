@@ -49,6 +49,12 @@ pipeline {
                 sh 'scripts/run.sh'
             }
         }
+        stage('Clean up build dir') {
+            steps {
+                sh 'echo "Remove build folder..."'
+                sh 'rm -fr build'
+            }
+        }
     }
     post {
         always {
