@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.17.0)
+cmake_minimum_required(VERSION 3.15.0)
 
 project(Hello_World_With_Jenkins VERSION 0.1.0)
 
