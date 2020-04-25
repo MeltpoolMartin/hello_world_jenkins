@@ -13,7 +13,7 @@ pipeline {
                 sh 'apk update'
             }
         }
-        stage('Collect packages') {
+        stage('Setup build environment') {
             steps {
                 sh 'apk add make'
                 sh 'apk add cmake'
@@ -26,6 +26,18 @@ pipeline {
                 sh 'cmake --version'
                 sh 'gcc --version'
                 sh 'ls -la /usr/bin'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'chmod +x build.sh'
+                sh './build.sh'
+            }
+        }
+        stage('Run') {
+            steps {
+                sh 'chmod +x run.sh'
+                sh './run.sh'
             }
         }
     }
