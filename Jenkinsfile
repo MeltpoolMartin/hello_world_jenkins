@@ -51,7 +51,9 @@ pipeline {
         }
     }
     post {
-        echo 'Clean up workspace...'
-        deleteDir()
+        always {
+            echo 'Clean up workspace...'
+            deleteDir()
+        }
     }
 }
