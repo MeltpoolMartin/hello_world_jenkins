@@ -6,11 +6,6 @@ pipeline {
         }
     }
     stages {
-        stage('Clena up') {
-            steps {
-                sh 'rm -'
-            }
-        }
         stage('Init package manager') {
             steps {
                 sh 'apk --version'
