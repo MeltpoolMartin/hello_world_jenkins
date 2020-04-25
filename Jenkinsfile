@@ -30,8 +30,9 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'ls -la'
                 sh 'chmod +x build.sh'
+                sh 'pwd'
+                sh 'ls -la .'
                 sh './build.sh'
             }
         }
