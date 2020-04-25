@@ -1,6 +1,6 @@
 #include <iostream>
 
 int main() {
-    std::cout << "Hello World with Jenkins" << std::endl;
+    std::cout << "Hello Schmeißer" << std::endl;
     return 0;
 }
