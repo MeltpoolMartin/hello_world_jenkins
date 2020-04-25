@@ -35,10 +35,12 @@ pipeline {
         }
         stage('Build') {
             steps {
+                sh 'echo "Building ..."'
                 sh 'chmod +x scripts/build.sh'
                 sh 'pwd'
                 sh 'ls -la .'
                 sh 'scripts/build.sh'
+                archiveArtifacts artifacts: 'build/bin/*', fingerprint: true
             }
         }
         stage('Run') {
@@ -47,5 +49,9 @@ pipeline {
                 sh 'scripts/run.sh'
             }
         }
+    }
+    post {
+        echo 'Clean up workspace...'
+        deleteDir()
     }
 }
