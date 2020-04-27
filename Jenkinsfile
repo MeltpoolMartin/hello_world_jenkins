@@ -6,14 +6,14 @@ pipeline {
         }
     }
     stages {
-        stage('Init package manager') {
+        stage('Package Manager') {
             steps {
                 sh 'apk --version'
                 sh 'whoami'
                 sh 'apk update'
             }
         }
-        stage('Setup build environment') {
+        stage('Setup Environment') {
             steps {
                 sh 'apk add --upgrade make'
                 sh 'apk add --upgrade cmake'
@@ -22,7 +22,7 @@ pipeline {
                 sh 'apk add --upgrade bash'
             }
         }
-        stage('Check installed software') {
+        stage('Verify Software') {
             steps {
                 sh 'make --version'
                 sh 'cmake --version'
@@ -40,7 +40,7 @@ pipeline {
                 sh 'pwd'
                 sh 'ls -la .'
                 sh 'scripts/build.sh'
-                archiveArtifacts artifacts: 'build/bin/*', fingerprint: true
+                archiveArtifacts artifacts: 'build/bin/*.exe', fingerprint: true
             }
         }
         stage('Run') {
@@ -49,7 +49,7 @@ pipeline {
                 sh 'scripts/run.sh'
             }
         }
-        stage('Clean up build dir') {
+        stage('Clean Up') {
             steps {
                 sh 'echo "Remove build folder..."'
                 sh 'rm -fr build'
