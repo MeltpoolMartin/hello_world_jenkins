@@ -40,7 +40,7 @@ pipeline {
                 sh 'pwd'
                 sh 'ls -la .'
                 sh 'scripts/build.sh'
-                archiveArtifacts artifacts: 'build/bin/*.exe', fingerprint: true
+                archiveArtifacts artifacts: 'build/bin/*', fingerprint: true
             }
         }
         stage('Run') {
@@ -49,16 +49,12 @@ pipeline {
                 sh 'scripts/run.sh'
             }
         }
-        stage('Clean Up') {
-            steps {
-                sh 'echo "Remove build folder..."'
-                sh 'rm -fr build'
-            }
-        }
     }
     post {
         always {
             echo 'Clean up workspace...'
+            echo "Remove (root) build folder..."
+            sh 'rm -fr build'
             deleteDir()
         }
     }
